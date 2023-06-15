@@ -38,26 +38,26 @@ class Main:
         self.run = True
         self.t1 = time()
         print('\n')
-        # try:
-        while self.run:
-            threads = []
-            for i in range(self.num_of_proxies_and_threads):
-                t = Thread(target=self.temp, args=(i,))
-                threads.append(t)
-                t.start()
+        try:
+            while self.run:
+                threads = []
+                for i in range(self.num_of_proxies_and_threads):
+                    t = Thread(target=self.temp, args=(i,))
+                    threads.append(t)
+                    t.start()
+    
+                for t in threads:
+                    t.join()
+    
+            self.reset_everything_and_try_again()
 
-            for t in threads:
-                t.join()
 
-        self.reset_everything_and_try_again()
-
-
-        # finally:
-        #     print('\n[*] Closing threads...')
-        #     self.run = False
-        #     print(f"\n[!] Tried {len(self.used)} passwords.\n")
-        #     print(f"[+] Finished requests in {round(time() - self.t1, 2)} seconds\n")
-        #     exit()
+        finally:
+            print('\n[*] Closing threads...')
+            self.run = False
+            print(f"\n[!] Tried {len(self.used)} passwords.\n")
+            print(f"[+] Finished requests in {round(time() - self.t1, 2)} seconds\n")
+            exit()
 
 
 

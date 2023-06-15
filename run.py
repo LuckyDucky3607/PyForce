@@ -18,7 +18,7 @@ try:
 
     fonts = ['3-d', '3d_diagonal', '4max', '5lineoblique', 'a_zooloo', 'alligator', 'alligator2', 'amc3line', 'amcaaa01', 'amcneko', 'amcslash', 'avatar', 'banner3-d', 'bell', 'big', 'bigchief', 'block2', 'braced', 'bright', 'bulbhead', 'calgphy2', 'chiseled', 'chunky', 'cola', 'contessa', 'crawford', 'cricket', 'cyberlarge', 'cybermedium', 'dancingfont', 'defleppard', 'doom', 'drpepper', 'eftitalic', 'epic', 'fire_font-s', 'fourtops', 'fuzzy', 'georgi16', 'ghost', 'ghoulish', 'glenyn', 'gothic', 'graceful', 'graffiti', 'henry3d', 'isometric1', 'larry3d', 'merlin1', 'modular', 'nancyj', 'nancyj-fancy', 'nscript', 'ogre', 'pepper', 'poison', 'puffy', 'red_phoenix', 'rev', 'rounded', 'rowancap', 'serifcap', 'slant', 'speed', 'swampland', 'tarty1', 'tarty2', 'tarty3', 'tarty4', 'tarty7', 'varsity']
     print('\n')
-    print_center(text2art('PyForce', font=choice(fonts)) + '\t\t\nAuthor: LuckyCoder107\t\tV.0.5')
+    print_center(text2art('PyForce', font=choice(fonts)) + '\t\t\nAuthor: LuckyDucky3607\t\tV.0.5')
     print('\n\n\n')
     path = input(f"\n\n{Fore.LIGHTBLACK_EX}[!] Enter the password list path: ")
     print(Fore.RESET)

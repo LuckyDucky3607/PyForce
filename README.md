@@ -12,7 +12,6 @@
     <img src="https://img.shields.io/badge/Made%20In-Turkey-green?style=flat-square">
     <img src="https://img.shields.io/badge/Written%20In-Python-blue?style=flat-square">
 <br>
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=LuckyDucky3607&repo=PyForce&theme=synthwave">
 </p>
 
 ### [+] Description

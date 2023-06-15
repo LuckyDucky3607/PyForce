@@ -97,7 +97,7 @@ class Main:
                     break
                 
                 password = password.strip()
-                r = UseProxies(self.website, {'guess': password, 'Guess': 'submit'},
+                r = UseProxies(self.website, **YOUR_DATA_HERE**,
                                z + 9052)
                 try:
                     r.thread(self.result)

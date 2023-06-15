@@ -31,6 +31,9 @@ PyForce, the simplest tool that can brute force any web app written entirely in 
  - python3
  - TOR
 
+### [+] Tested on
+- `Kali linux`
+
 ### [+] Disclaimer 
 I am not responsible if any illegal actions were done using this script, this script is for educational purposes only.
 

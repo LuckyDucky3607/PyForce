@@ -10,7 +10,7 @@ class Make:
             num_sock += 1
             num_control += 1
             print(f"[*] Configuring TOR on port {num_sock}")
-            call(f'cp /etc/tor/torrc /etc/tor/torrc{i}', shell=True)
+            call(f'cp etc/tor/torrc_for_PyForce /etc/tor/torrc{i}', shell=True)
             call(f'mkdir /var/lib/tor{i}', shell=True, stdout=DEVNULL, stderr=DEVNULL)
             with open(f'/etc/tor/torrc{i}', 'a') as tor:
                 tor.write(f'SocksPort {num_sock}\n')

@@ -5,7 +5,6 @@
 <p align="center">
     <img src="https://img.shields.io/github/stars/LuckyDucky3607/PyForce?style=for-the-badge&color=orange">
     <img src="https://img.shields.io/github/issues/LuckyDucky3607/PyForce?style=for-the-badge&color=red">
-    <img src="https://img.shields.io/github/contributors/LuckyDucky3607/PyForce?style=for-the-badge&color=cyan">
 <br>
     <img src="https://img.shields.io/badge/Author-LuckyDucky3607-magenta?style=flat-square">
     <img src="https://img.shields.io/badge/Open%20Source-Yes-orange?style=flat-square">

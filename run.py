@@ -225,10 +225,10 @@ CookieAuthentication 1
         exit()
 
 
-    integer = input(f"\n{Fore.LIGHTBLACK_EX}[!] Enter the number of threads and proxies at the same time you want to use (Default and recommended 20): ")
+    integer = input(f"\n{Fore.LIGHTBLACK_EX}[!] Enter the number of threads and proxies at the same time you want to use (Default and recommended 25): ")
     print(Fore.RESET)
     if not integer:
-        integer = 20
+        integer = 25
     try:
         integer = int(integer)
     except ValueError:

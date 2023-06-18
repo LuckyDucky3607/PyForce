@@ -97,7 +97,7 @@ class Main:
                 password = password.strip()
                 if password in self.used and password not in self.unused:
                     continue
-                r = UseProxies(self.website, {'log': 'admin', 'pwd': password, 'submit': 'wp-submit'},
+                r = UseProxies(self.website, **YOUR_DATA_HERE**,
                                z + 9052)
                 try:
                     r.thread(self.result)

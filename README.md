@@ -24,7 +24,7 @@ PyForce, the simplest tool that can brute force any website, written entirely in
 
 ### [+] Usage
  - `sudo chmod +x run.py`
- - `Go into the 100th line in the InternetBruteForce.py script and then add the data of the website you want to brute force in the **YOUR_DATA_HERE** field (e.g. data: {'guess': password, 'Guess': 'submit'})`
+ - `Go into the 100th line in the InternetBruteForce.py script (located in the Dependincies) and then add the data of the website you want to brute force in the **YOUR_DATA_HERE** field (e.g. data: {'guess': password, 'Guess': 'submit'})`
  - `sudo ./run.py`
 
 ### [+] Requirements

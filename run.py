@@ -1,12 +1,27 @@
 #!/usr/bin/env python3
+import platform
 
-from art import *
-from colorama import Fore
-from time import sleep
-from random import choice
-import os
-from sys import exit
-from Dependincies import InternetBruteForce
+system = platform.system()
+if system == "Linux":
+    from art import *
+    from colorama import Fore
+    from time import sleep
+    from random import choice
+    import os
+    from sys import exit
+    from Dependincies import InternetBruteForce
+elif system == "Android":
+    from pip._internal import main as pip
+    pip(['install', 'art'])
+    pip(['install', 'colorama'])
+    from art import *
+    from colorama import Fore
+    from time import sleep
+    from random import choice
+    import os
+    from sys import exit
+    from Dependincies import InternetBruteForce
+
 
 
 try:

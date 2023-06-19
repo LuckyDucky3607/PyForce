@@ -6,7 +6,7 @@ from time import sleep
 from random import choice
 import os
 from sys import exit
-import InternetBruteForce
+from Dependincies import InternetBruteForce
 
 
 try:

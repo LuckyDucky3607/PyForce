@@ -49,7 +49,10 @@ class UseProxies:
                         w.write(r.text)
                     raise OverflowError
             except requests.exceptions.Timeout:
-                system(f'notify-send "InternetBruteForce.py" "Timeout occurred on {self.num} while trying {self.data["pwd"]}"')
+                try:
+                    system(f'notify-send "InternetBruteForce.py" "Timeout occurred on {self.num} while trying {self.data["pwd"]}"')
+                except:
+                    pass
                 raise StopAsyncIteration
             except (ProxyError, SSLZeroReturnError, ConnectionError, GeneralProxyError, RemoteDisconnected, requests.exceptions.ConnectionError, requests.exceptions.ChunkedEncodingError, requests.exceptions.Timeout, IncompleteRead, ProtocolError):
                 exit()

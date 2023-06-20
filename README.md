@@ -3,7 +3,7 @@
 <h4 align="center"> PyForce any website you want </h4>
 
 <p align="center">
-    <img src="https://img.shields.io/github/stars/LuckyDucky3607/PyForce?style=for-the-badge&color=orange">
+    <img src="https://img.shields.io/github/stars/LuckyDucky3607/PyForce?style=for-the-badge&color=blue">
     <img src="https://img.shields.io/github/issues/LuckyDucky3607/PyForce?style=for-the-badge&color=red">
 <br>
     <img src="https://img.shields.io/badge/Author-LuckyDucky3607-magenta?style=flat-square">

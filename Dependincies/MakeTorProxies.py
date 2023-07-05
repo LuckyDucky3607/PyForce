@@ -1,6 +1,6 @@
 import sys
 import subprocess
-from subprocess import PIPE
+from subprocess import PIPE, DEVNULL
 
 class Make:
     @staticmethod
@@ -20,7 +20,7 @@ class Make:
 
             if is_termux:
                 subprocess.run(['cp', '/data/data/com.termux/files/usr/etc/tor/torrc_for_PyForce', f'/data/data/com.termux/files/usr/etc/tor/torrc{i}'], check=True)
-                subprocess.run(['mkdir', f'/data/data/com.termux/files/usr/var/lib/tor{i}'], stdout=PIPE, stderr=PIPE, check=True)
+                subprocess.run(['mkdir', f'/data/data/com.termux/files/usr/var/lib/tor{i}'], stdout=DEVNULL, stderr=DEVNULL)
                 with open(f'/data/data/com.termux/files/usr/etc/tor/torrc{i}', 'a') as tor:
                     tor.write(f'SocksPort {num_sock}\n')
                     tor.write(f'ControlPort {num_control}\n')
@@ -28,7 +28,7 @@ class Make:
                 tor = subprocess.Popen(['tor', '-f', f'/data/data/com.termux/files/usr/etc/tor/torrc{i}'], stdout=PIPE)
             else:
                 subprocess.run(['cp', '/etc/tor/torrc_for_PyForce', f'/etc/tor/torrc{i}'], check=True)
-                subprocess.run(['mkdir', f'/var/lib/tor{i}'], stdout=PIPE, stderr=PIPE, check=True)
+                subprocess.run(['mkdir', f'/var/lib/tor{i}'], stdout=DEVNULL, stderr=DEVNULL)
                 with open(f'/etc/tor/torrc{i}', 'a') as tor:
                     tor.write(f'SocksPort {num_sock}\n')
                     tor.write(f'ControlPort {num_control}\n')

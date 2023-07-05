@@ -2,15 +2,15 @@
 
 from threading import Thread
 from time import time
-from useProxies import UseProxies
+from Dependincies import useProxies
 from time import sleep
 
-import EndTor
-import GetNewIp
-import MakeTorProxies
+from Dependincies import EndTor
+from Dependincies import GetNewIp
+from Dependincies import MakeTorProxies
 
 
-
+UseProxies = useProxies.UseProxies
 class Main:
     def __init__(self, password_path: str, number_of_proxies_and_threads: int, website_uri: str, indicator: str):
         self.num_of_proxies_and_threads = number_of_proxies_and_threads
@@ -97,7 +97,7 @@ class Main:
                 password = password.strip()
                 if password in self.used and password not in self.unused:
                     continue
-                r = UseProxies(self.website, **YOUR_DATA_HERE**,
+                r = UseProxies(self.website, {'guess': password, 'Guess': 'submit'},
                                z + 9052)
                 try:
                     r.thread(self.result)

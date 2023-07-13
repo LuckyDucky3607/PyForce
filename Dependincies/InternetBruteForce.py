@@ -129,7 +129,7 @@ class Main:
                 if password in self.used:
                     continue
                 password = password.strip()
-                r = UseProxies(self.website, **YOUR DATE HERE**, z + 9052)
+                r = UseProxies(self.website, **YOU DATA HERE**, z + 9052)
                 try:
                     if not tor_status:
                         r.thread(self.result)
